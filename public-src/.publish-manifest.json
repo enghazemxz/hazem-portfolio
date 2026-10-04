@@ -1,0 +1,52 @@
+{
+  "generatedAt": "2026-10-04T10:10:42.783Z",
+  "enabledRoutes": [
+    "home",
+    "work",
+    "cgi",
+    "xr",
+    "development",
+    "about",
+    "contact"
+  ],
+  "projects": [
+    {
+      "slug": "isocline-labs-vr-solar-training",
+      "route": "xr"
+    },
+    {
+      "slug": "jewelry-3d-product-visualization-rendering",
+      "route": "cgi"
+    },
+    {
+      "slug": "dopamine-perfume-ad-v2",
+      "route": "cgi"
+    },
+    {
+      "slug": "mini-focus-watch-ad",
+      "route": "cgi"
+    },
+    {
+      "slug": "mini-robot-3d-scene",
+      "route": "cgi"
+    },
+    {
+      "slug": "perfume-product-rendering",
+      "route": "cgi"
+    },
+    {
+      "slug": "burger-cgi-food-visualization",
+      "route": "cgi"
+    },
+    {
+      "slug": "3d-wireless-headset-game-ready-model",
+      "route": "cgi"
+    },
+    {
+      "slug": "game-ready-luxury-bathroom-real-estate-vr-environment",
+      "route": "cgi"
+    }
+  ],
+  "mediaFiles": 37,
+  "mediaBytes": 15366630
+}

@@ -1,0 +1,45 @@
+# Dependencies and generated build output
+/node_modules/
+/dist/
+/.wrangler/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Logs and local runtime state
+*.log
+/logs/
+/backups/
+/__pycache__/
+*.py[cod]
+/portfolio-contact-messages.json
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local editable source. public-src/ is the sanitized deployment export.
+/media/
+/css/
+/hazem.jpg
+/a.jpg
+/content.png
+/hh.html
+/portfolio*.html*
+/portfolio-projects.js
+/portfolio-site-content.js
+/portfolio-assets.js
+/portfolio-store.js
+/portfolio-redesign.js
+/portfolio-experience.js
+/portfolio_admin.py
+/PORTFOLIO_ADMIN_README.md
+/run_portfolio_admin.bat
+/start_portfolio_admin.ps1
+
+# Local export helpers that target unpublished media
+/scripts/optimize-published-videos.ps1
