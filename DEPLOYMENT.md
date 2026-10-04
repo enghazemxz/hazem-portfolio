@@ -9,16 +9,16 @@
 - Production build: `npm run build`
 - Validation: `npm run validate`
 - Output directory: `dist`
-- Cloudflare Pages project: `hazem-portfolio` (create during the one-time Git connection)
+- Cloudflare Worker: `hazem-portfolio`
 - Production branch: `main`
-- Production URL: assigned by Cloudflare after the first deployment
+- Production URL: `https://hazem-portfolio.hazemtube1.workers.dev`
 - GitHub repository: `https://github.com/enghazemxz/hazem-portfolio`
 
 ## Architecture
 
 The Python dashboard and editable local source stay on this computer. `npm run export:public` reads that source and regenerates `public-src/` with only dashboard-enabled routes, projects, and referenced media. Disabled routes such as Motion/Reels are removed from project data, navigation, Git, and the deployment output. Visible images are converted to optimized WebP files during export.
 
-Git tracks the sanitized `public-src/`, deployment scripts, tests, and the Cloudflare Function. Cloudflare runs `npm run build` and publishes `dist/`. A Pages Function at `/contact/submit` validates inquiries and asks Resend to deliver them; no email credential is shipped to the browser.
+Git tracks the sanitized `public-src/`, deployment scripts, tests, and the Cloudflare Worker. Cloudflare Workers Builds runs `npm run build` and publishes `dist/` through the static-assets binding. The Worker handles `/contact/submit`, validates inquiries, and asks Resend to deliver them; no email credential is shipped to the browser.
 
 ## Cloudflare Settings
 
@@ -29,7 +29,7 @@ Git tracks the sanitized `public-src/`, deployment scripts, tests, and the Cloud
 - Build output directory: `dist`
 - Node version: `22`
 
-Add these encrypted Pages variables for both Preview and Production:
+Add these encrypted Worker variables for Production:
 
 - `RESEND_API_KEY`: Resend API key
 - `CONTACT_TO_EMAIL`: destination inbox
@@ -38,17 +38,9 @@ Add these encrypted Pages variables for both Preview and Production:
 
 Resend requires a verified sending domain. Until the three required variables are configured, the form returns a clear temporary-unavailable response and sends nothing.
 
-## One-Time Cloudflare Connection
+## Continuous Deployment
 
-Wrangler is authenticated, but Cloudflare requires the GitHub App installation to be approved in the dashboard before it can read a repository. Do not create a Direct Upload Pages project; that project type cannot later switch to Git integration.
-
-1. Open **Workers & Pages** in Cloudflare and choose **Create application**.
-2. Choose **Pages**, then **Connect to Git**.
-3. Install/authorize **Cloudflare Workers and Pages** for `enghazemxz/hazem-portfolio` and select that repository.
-4. Set project name `hazem-portfolio`, production branch `main`, build command `npm run build`, output directory `dist`, and leave root directory empty.
-5. Add `NODE_VERSION=22` plus the contact variables above, then save and deploy.
-
-This creates the first HTTPS deployment and enables automatic production deployments from `main`.
+Cloudflare Workers Builds is connected to `enghazemxz/hazem-portfolio`. A successful push to `main` starts a production build automatically. Build logs and deployment history are available under **Workers & Pages > hazem-portfolio > Builds**.
 
 ## Publishing Updates
 
@@ -61,7 +53,7 @@ git commit -m "Update portfolio"
 git push
 ```
 
-Cloudflare Pages then builds and deploys `main` automatically. Always review `.publish-manifest.json` and `git status` before committing when route visibility changed.
+Cloudflare Workers Builds then deploys `main` automatically. Always review `.publish-manifest.json` and `git status` before committing when route visibility changed.
 
 ## Hidden Content
 
@@ -73,4 +65,4 @@ The form uses same-origin checks, a honeypot, size limits, server-side validatio
 
 ## Custom Domain
 
-In Cloudflare Pages, open **Custom domains**, choose **Set up a domain**, and enter the portfolio hostname. If the domain already uses Cloudflare DNS, the record is created automatically. Keep the generated `pages.dev` address active as a fallback and do not hard-code either hostname in the site.
+In the `hazem-portfolio` Worker, open **Settings > Domains & Routes**, choose **Add > Custom Domain**, and enter the portfolio hostname. If the domain already uses Cloudflare DNS, Cloudflare creates the route and certificate. Keep the `workers.dev` address active as a fallback and do not hard-code either hostname in the site.

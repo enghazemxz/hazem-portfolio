@@ -10,7 +10,7 @@
   "scripts": {
     "export:public": "node scripts/export-public.mjs",
     "build": "node scripts/build.mjs && tailwindcss -c tailwind.config.cjs -i public-src/css/tailwind.input.css -o dist/css/tailwind.css --minify",
-    "preview": "npm run build && wrangler pages dev dist",
+    "preview": "npm run build && wrangler dev",
     "test": "node --test tests/*.test.mjs",
     "validate": "npm run build && npm test"
   },

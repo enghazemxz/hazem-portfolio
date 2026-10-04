@@ -89,7 +89,6 @@ async function main() {
     filter: source => path.basename(source) !== '.publish-manifest.json' && path.basename(source) !== 'tailwind.input.css'
   });
 
-  await fs.writeFile(path.join(outputRoot, '_routes.json'), `${JSON.stringify({ version: 1, include: ['/contact/submit'], exclude: [] }, null, 2)}\n`, 'utf8');
   await fs.writeFile(path.join(outputRoot, '404.html'), `<!doctype html>
 <html lang="en" class="dark">
 <head>
