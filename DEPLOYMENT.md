@@ -9,10 +9,10 @@
 - Production build: `npm run build`
 - Validation: `npm run validate`
 - Output directory: `dist`
-- Cloudflare Pages project: `hazem-portfolio`
+- Cloudflare Pages project: `hazem-portfolio` (create during the one-time Git connection)
 - Production branch: `main`
 - Production URL: assigned by Cloudflare after the first deployment
-- GitHub repository: assigned after GitHub authentication
+- GitHub repository: `https://github.com/enghazemxz/hazem-portfolio`
 
 ## Architecture
 
@@ -37,6 +37,18 @@ Add these encrypted Pages variables for both Preview and Production:
 - `CONTACT_SUCCESS_MESSAGE`: optional success message
 
 Resend requires a verified sending domain. Until the three required variables are configured, the form returns a clear temporary-unavailable response and sends nothing.
+
+## One-Time Cloudflare Connection
+
+Wrangler is authenticated, but Cloudflare requires the GitHub App installation to be approved in the dashboard before it can read a repository. Do not create a Direct Upload Pages project; that project type cannot later switch to Git integration.
+
+1. Open **Workers & Pages** in Cloudflare and choose **Create application**.
+2. Choose **Pages**, then **Connect to Git**.
+3. Install/authorize **Cloudflare Workers and Pages** for `enghazemxz/hazem-portfolio` and select that repository.
+4. Set project name `hazem-portfolio`, production branch `main`, build command `npm run build`, output directory `dist`, and leave root directory empty.
+5. Add `NODE_VERSION=22` plus the contact variables above, then save and deploy.
+
+This creates the first HTTPS deployment and enables automatic production deployments from `main`.
 
 ## Publishing Updates
 

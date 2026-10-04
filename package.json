@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22 <25"
+  },
   "description": "Production export and Cloudflare Pages tooling for Hazem Essam's portfolio.",
   "scripts": {
     "export:public": "node scripts/export-public.mjs",
