@@ -393,12 +393,6 @@ async function main() {
     mediaBytes += await publishMedia(reference, destination);
   }
 
-  const faviconSource = publishedSiteContent.about?.portrait || publishedSiteContent.seo?.socialImage;
-  if (faviconSource) {
-    const portrait = assertWithin(outputRoot, path.join(outputRoot, normalizeMediaReference(faviconSource)));
-    await sharp(portrait).resize(96, 96, { fit: 'cover' }).png().toFile(path.join(outputRoot, 'favicon.png'));
-  }
-
   const manifest = {
     generatedAt: new Date().toISOString(),
     enabledRoutes: Object.entries(navigation).filter(([, enabled]) => enabled !== false).map(([key]) => key),
